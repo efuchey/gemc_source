@@ -21,8 +21,11 @@ public:
 	//	double driftVelocity[6];
 	double miniStagger[6];
 	double dcThreshold;
-	int NWIRES;
+	int NWIRES = 112;
+	int NLAYERS= 6;
 	double dLayer[6];                              // ~cell size in each superlayer - one of Mac's core parameters
+	int    stbloc[6][6];                           // wire readout side: -1=left, 1=right 
+	double vprop;                                  // signal propagation speed along the wire  
 	
 	// efficiency parameters for each superlayer
 	double P1[6][6], P2[6][6], P3[6][6], P4[6][6], iScale[6][6];
@@ -74,7 +77,7 @@ public:
 	};
 	//===> 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
 	// (Local wire ID: 0 for 1st, 16th, 32th, 48th, 64th, 80th, 96th wires)
-	
+
 	
 	
 };
@@ -116,7 +119,11 @@ public:
 	double doca_smearing(double x, double beta, int sector, int superlayer);
 	
 	G4ThreeVector psmear(G4ThreeVector p);
-	
+
+        G4ThreeVector wireLxyz(int layer, int wire, double dlayer, double dwire);
+
+        double doca(G4ThreeVector pos, int layer, int wire, double dlayer, double dwire);
+
 private:
 	
 	// constants initialized with initWithRunNumber

@@ -32,6 +32,7 @@ env.Append(CPPPATH = 'mirrors')
 mirrors_sources = Split("""
 	mirrors/mirrors_factory.cc
 	mirrors/mysql_mirrors.cc
+	mirrors/sqlite_mirrors.cc
 	mirrors/text_mirrors.cc""")
 env.Library(source = mirrors_sources, target = "lib/gmirrors")
 
@@ -65,6 +66,7 @@ det_sources = Split("""
 	detector/sqlite_det_factory.cc
 	detector/gdml_det_factory.cc
 	detector/cad_det_factory.cc
+	detector/sqlite_cad_factory.cc
 	detector/clara_det_factory.cc
 	detector/text_det_factory.cc""")
 env.Library(source = det_sources, target = "lib/gdetector")
@@ -108,7 +110,7 @@ env.Library(source = field_sources, target = "lib/gfields")
 
 
 # Hit Processes
-env.Append(CPPPATH = ['hitprocess', 'hitprocess/clas12', 'hitprocess/clas12/svt', 'hitprocess/clas12/micromegas', 'hitprocess/clas12/alert'])
+env.Append(CPPPATH = ['hitprocess', 'hitprocess/clas12', 'hitprocess/clas12/svt', 'hitprocess/clas12/micromegas', 'hitprocess/clas12/alert', 'hitprocess/clas12/recoil'])
 env.Append(CPPPATH = ['hitprocess/Aprime', 'hitprocess/GlueX', 'hitprocess/solid'])
 hitp_sources = Split("""
 	hitprocess/HitProcess_MapRegister.cc
@@ -141,6 +143,8 @@ hitp_sources = Split("""
 	hitprocess/clas12/band_hitprocess.cc
  	hitprocess/clas12/uRwell/uRwell_hitprocess.cc
  	hitprocess/clas12/uRwell/uRwell_strip.cc
+        hitprocess/clas12/recoil/recoil_hitprocess.cc	
+        hitprocess/clas12/recoil/recoil_strip.cc
 	hitprocess/bdx/cormo_hitprocess.cc
 	hitprocess/bdx/veto_hitprocess.cc
 	hitprocess/bdx/crs_hitprocess.cc

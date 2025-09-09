@@ -24,6 +24,7 @@
 
 // The second char:
 // i for integers
+// l for long
 // d for doubles
 // s for strings
 
@@ -328,7 +329,7 @@ map <string, gBank> read_banks(goptions gemcOpt, map <string, string> allSystems
             // first select all unique bank_name for this system
             string dbexecute = "select DISTINCT bank_name from banks where system = '" + systemName + "'";
 
-            // executing query - will exit if not successfull.
+            // executing query - will exit if not successful.
             QSqlQuery q;
             if (!q.exec(dbexecute.c_str())) {
                 cout  << " !!! Failed to execute SQLITE query " << dbexecute << ". This is a fatal error. Exiting." << endl;
@@ -349,7 +350,7 @@ map <string, gBank> read_banks(goptions gemcOpt, map <string, string> allSystems
 
                 string dbexecute = "select variable_name, int_id, type, description from banks where bank_name = '" + bname + "'";
 
-                // executing query - will exit if not successfull.
+                // executing query - will exit if not successful.
                 QSqlQuery q;
                 if (!q.exec(dbexecute.c_str())) {
                     cout << " !!! Failed to execute SQLITE query " << dbexecute << ". This is a fatal error. Exiting." << endl;
@@ -415,6 +416,7 @@ int gBank::getVarId(string bank) {
 string gBank::getVarType(string var) {
     for (unsigned int i = 0; i < name.size(); i++) {
         if (name[i] == var && type[i].length() == 2) {
+            if (type[i].find("l") == 1) return "l";
             if (type[i].find("i") == 1) return "i";
             if (type[i].find("d") == 1) return "d";
         }
