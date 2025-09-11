@@ -13,13 +13,13 @@ HipoSchema::HipoSchema() {
     //           this way banks can be grouped in skimming
     // itemid  - and item number (8 bit) to just have a
     //           unique number associated with bank.
-    
+
     // CLAS12 schemas are defined at https://github.com/JeffersonLab/clas12-offline-software/tree/development/etc/bankdefs/hipo4
     // Detectors: https://github.com/JeffersonLab/clas12-offline-software/blob/development/etc/bankdefs/hipo4/data.json
     runConfigSchema = hipo::schema("RUN::config", 10000, 11);
     runRFSchema = hipo::schema("RUN::rf", 10000, 12);
     trueInfoSchema = hipo::schema("MC::True", 40, 4);
-    
+
     // generators
     geantParticle = hipo::schema("MC::Particle", 40, 2);
     mcEventHeader = hipo::schema("MC::Event", 40, 1);
@@ -97,7 +97,8 @@ HipoSchema::HipoSchema() {
 
 
     // detectors
-    alertAhdcADCSchema.parse("sector/B, layer/B, component/S, order/B, ADC/I, time/F, ped/S, integral/I, timestamp/L");
+    //alertAhdcADCSchema.parse("sector/B, layer/B, component/S, order/B, ADC/I, time/F, ped/S, integral/I, timestamp/L");
+    alertAhdcADCSchema.parse("sector/B, layer/B, component/S, order/B, ADC/I, time/F, ped/S, integral/I, timestamp/L, timeRiseCFA/F, timeCFD/F, timeOVR/F, mctime/F, mcEtot/F, nsteps/I");
     alertAhdcTDCSchema.parse("sector/B, layer/B, component/S, order/B, TDC/I, ped/S");
     //alertAhdcWF136Schema.parse("sector/B, layer/B, component/S, order/B, timestamp/F, s1/S, s2/S, s3/S, s4/S, s5/S, s6/S, s7/S, s8/S, s9/S, s10/S");
     std::string wf_string = "sector/B, layer/B, component/S, order/B, timestamp/F";
